@@ -1,14 +1,22 @@
+
 mapboxgl.accessToken = 'pk.eyJ1IjoiaGR1bm44MTQiLCJhIjoiY21iMTZ4NWliMDUyNTJrcHB1cHRza3gwMSJ9.jbN7OYogHdgS_qZMy2beRQ';
 
-let geojsonData;
+let geojsonData = null;
 
 fetch('criz_boundary.geojson')
-  .then(response => response.json())
+  .then(response => {
+    if (!response.ok) throw new Error("Failed to load GeoJSON");
+    return response.json();
+  })
   .then(data => {
     geojsonData = data;
     const button = document.getElementById('checkButton');
     button.disabled = false;
-    button.onclick = lookupAddress;
+    button.addEventListener("click", lookupAddress);
+  })
+  .catch(err => {
+    console.error("Error loading CRIZ boundary:", err);
+    document.getElementById('result').innerText = "Could not load CRIZ boundary.";
   });
 
 function lookupAddress() {
@@ -38,5 +46,8 @@ function lookupAddress() {
         turf.booleanPointInPolygon(point, poly)
       );
       result.innerText = inside ? "✅ This address IS in the CRIZ." : "❌ This address is NOT in the CRIZ.";
+    })
+    .catch(() => {
+      result.innerText = "Error during geocoding request.";
     });
 }
