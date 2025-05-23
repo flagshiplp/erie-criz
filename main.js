@@ -1,4 +1,3 @@
-
 mapboxgl.accessToken = 'pk.eyJ1IjoiaGR1bm44MTQiLCJhIjoiY21iMTZ4NWliMDUyNTJrcHB1cHRza3gwMSJ9.jbN7OYogHdgS_qZMy2beRQ';
 
 let geojsonData;
@@ -7,6 +6,9 @@ fetch('criz_boundary.geojson')
   .then(response => response.json())
   .then(data => {
     geojsonData = data;
+    const button = document.getElementById('checkButton');
+    button.disabled = false;
+    button.onclick = lookupAddress;
   });
 
 function lookupAddress() {
