@@ -1,0 +1,21 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>CRIZ Lookup Tool</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6.5.0/turf.min.js"></script>
+</head>
+<body>
+  <h1>Am I in the CRIZ?</h1>
+  <input type="text" id="address" placeholder="Enter an address" />
+  <button onclick="lookupAddress()">Check</button>
+  <p id="result"></p>
+
+  <script src="main.js"></script>
+</body>
+</html>
